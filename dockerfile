@@ -27,6 +27,9 @@ RUN apt-get update \
     procps \
     zlib1g-dev \
     libxml2-dev \
+    pandoc \
+    pandoc-citeproc \
+    libgit2-dev \
     python-setuptools \
     sudo \
     wget \
@@ -87,6 +90,8 @@ RUN apt-get update \
           \nsaveAction="0"' \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
   && chown -R rstudio:rstudio /home/rstudio/.rstudio
+
+RUN R -e "install.packages('renv'); renv::consent(provided = TRUE)"
 
 COPY userconf.sh /etc/cont-init.d/userconf
 
