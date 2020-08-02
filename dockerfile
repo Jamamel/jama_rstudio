@@ -1,7 +1,7 @@
 FROM jamamel/jama_r-base:3.6.3
 
 ARG RSTUDIO_VERSION
-ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.2.5042}
+ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.3.1056}
 ARG S6_VERSION
 ARG PANDOC_TEMPLATES_VERSION
 ENV S6_VERSION=${S6_VERSION:-v1.21.7.0}
@@ -18,9 +18,9 @@ RUN apt-get update \
     git \
     libapparmor1 \
     libclang-dev \
-    libcurl4-openssl-dev \
+    #libcurl4-openssl-dev \
     libedit2 \
-    libssl-dev \
+    #libssl-dev \
     lsb-release \
     multiarch-support \
     psmisc \
