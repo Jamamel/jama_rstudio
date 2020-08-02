@@ -18,9 +18,9 @@ RUN apt-get update \
     git \
     libapparmor1 \
     libclang-dev \
-#   libcurl4-openssl-dev \
+    libcurl4-openssl-dev \
     libedit2 \
-#    libssl-dev \
+    libssl-dev \
     lsb-release \
     multiarch-support \
     psmisc \
