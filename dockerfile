@@ -1,7 +1,7 @@
 FROM jamamel/jama_r-base:3.6.3
 
 ARG RSTUDIO_VERSION
-ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.3.1056}
+ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.2.5042}
 ARG S6_VERSION
 ARG PANDOC_TEMPLATES_VERSION
 ENV S6_VERSION=${S6_VERSION:-v1.21.7.0}
@@ -14,14 +14,6 @@ ENV PANDOC_TEMPLATES_VERSION=${PANDOC_TEMPLATES_VERSION:-2.9}
 ## Symlink pandoc, pandoc-citeproc so they are available system-wide
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-    file \
-    git \
-    libapparmor1 \
-    libclang-dev \
-    #libcurl4-openssl-dev \
-    libedit2 \
-    #libssl-dev \
-    lsb-release \
     multiarch-support \
     psmisc \
     procps \
