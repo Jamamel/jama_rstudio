@@ -1,4 +1,4 @@
-FROM jamamel/jama_r-base:3.6.3
+FROM jamamel/jama_python3
 
 ARG RSTUDIO_VERSION
 ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.2.5042}
@@ -91,4 +91,5 @@ EXPOSE 8787
 ## automatically link a shared volume for kitematic users
 VOLUME /home/rstudio/kitematic
 
-CMD ["/init"]
+CMD /init  \
+  && /bin/bash
