@@ -1,4 +1,4 @@
-FROM jamamel/jama_python3
+FROM jamamel/jama_python3:latest
 
 ARG RSTUDIO_VERSION
 ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.2.5042}
