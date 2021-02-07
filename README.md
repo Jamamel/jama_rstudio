@@ -5,7 +5,6 @@
 
 # Using the jamamel/jama_rstudio container
 
-
 ## Quickstart
 
 
