@@ -1,38 +1,28 @@
+**Note**: This image is based on RStudio's: [rocker/r-ver](https://github.com/rocker-org/rocker-versioned) and underlying images.
+
 **Note**: See the rocker-org/rocker-versioned2 repo for Dockerfile recipes for R >= 4.0.0
 
 
-
-# Using the rocker/rstudio container
+# Using the jamamel/jama_rstudio container
 
 ## Quickstart
 
-    docker run --rm -p 8787:8787 -e PASSWORD=yourpasswordhere rocker/rstudio
+
+    docker run --rm -p 8787:8787 -e USER=rstudio -e PASSWORD=yourpasswordhere jamamel/jama_rstudio:3.6.3
 
 Visit `localhost:8787` in your browser and log in with username `rstudio` and the password you set. **NB: Setting a password is now REQUIRED.**  Container will error otherwise.
 
 
-Note that all commands documented here work in just the same way with any container derived from `rocker/rstudio`,
-such as `rocker/tidyverse`.  
-
 ## Common configuration options:
-
-
-### Use different versions of R
-
-    docker run -d -p 8787:8787 -e PASSWORD=yourpasswordhere rocker/rstudio:devel
-
-    docker run -d -p 8787:8787 -e PASSWORD=yourpasswordhere rocker/rstudio:3.2.0
-
-See [rocker/r-ver](https://github.com/rocker-org/rocker-versioned) for details.
 
 
 ### Give the user root permissions (add to sudoers)
 
-    docker run -d -p 8787:8787 -e ROOT=TRUE -e PASSWORD=yourpasswordhere rocker/rstudio
+    docker run -d -p 8787:8787 -e ROOT=TRUE -e PASSWORD=yourpasswordhere jamamel/jama_rstudio:3.6.3
 
 Link a local volume (in this example, the current working directory, `$(pwd)`) to the rstudio container:
 
-    docker run -d -p 8787:8787 -v $(pwd):/home/rstudio -e PASSWORD=yourpasswordhere rocker/rstudio
+    docker run -d -p 8787:8787 -v $(pwd):/home/rstudio -e PASSWORD=yourpasswordhere jamamel/jama_rstudio:3.6.3
 
 ### Bypassing the authentication step
 
@@ -45,29 +35,11 @@ Simply set the environmental variable `DISABLE_AUTH=true`, e.g.
 docker run --rm \
   -p 127.0.0.1:8787:8787 \
   -e DISABLE_AUTH=true \
-  rocker/rstudio
+  jamamel/jama_rstudio:3.6.3
 ```
 
 Navigate to <http://localhost:8787> and you should be logged into RStudio as
 the `rstudio` user without needing a password.
-
-
-### Add shiny server on start up with `e ADD=shiny`
-
-    docker run -d -p 3838:3838 -p 8787:8787 -e ADD=shiny -e PASSWORD=yourpasswordhere rocker/rstudio
-
-shiny server is now running on `localhost:3838` and RStudio on `localhost:8787`.  
-
-
-Note: this triggers shiny install at runtime, which may require a few minutes to execute before services come up.
-If you are building your own Dockerfiles on top of this stack, you should simply include the RUN command:
-
-    RUN export ADD=shiny && bash /etc/cont-init.d/add
-
-Then omit the `-e ADD=shiny` when running your image and shiny should be installed and waiting on port 3838.
-
-**Note**: Please see the `rocker/shiny` and `rocker/shiny-verse` images for
-setting up a shiny server in a separate container from RStudio. 
 
 
 #### Access a root shell for a running `rstudio` container instance
@@ -92,12 +64,12 @@ Custom uid/gid etc is usually only needed when sharing a local volume for a user
 
 Adding additional users:  From a root bash shell (see above), the usual debian linux commands can be used to create new users and passwords, e.g. 
 
+
 ## Developers / Dockerfile authors
 
 The RStudio images use the `s6-init` system to run multiple/persistant jobs.  While init systems like supervisord are better known, `s6` is powerful, lightweight, easy to use, and plays nicely with docker (e.g. avoiding the pid 1 / zombie problem).  See [s6-overlay](https://github.com/just-containers/s6-overlay) for details if you need to add additional services (such as an sshd server) or custom start-up, shut down, or logging scripts.  
 
+
 ## More help
 
 See the Wiki for additional documentation and use cases: <https://github.com/rocker-org/rocker/wiki>
-
-

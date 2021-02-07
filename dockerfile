@@ -1,4 +1,4 @@
-FROM jamamel/jama_python3:latest
+FROM jamamel/jama_rpython3:3.6.3
 
 ARG RSTUDIO_VERSION
 ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.2.5042}
@@ -77,7 +77,7 @@ RUN apt-get update \
           \nsaveAction="0"' \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
   && chown -R rstudio:rstudio /home/rstudio/.rstudio \
-  && Rscript -e "renv::consent(provided = TRUE)"
+  && Rscript -e "install.packages('renv'); renv::consent(provided = TRUE)"
 
 COPY userconf.sh /etc/cont-init.d/userconf
 
