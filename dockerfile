@@ -77,7 +77,7 @@ RUN apt-get update \
           \nsaveAction="0"' \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
   && chown -R rstudio:rstudio /home/rstudio/.rstudio \
-  && Rscript -e "renv::consent(provided = TRUE)"
+  && Rscript -e "install.packages('renv'); renv::consent(provided = TRUE)"
 
 COPY userconf.sh /etc/cont-init.d/userconf
 
